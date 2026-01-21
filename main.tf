@@ -1,5 +1,5 @@
 module "dynamodb"{
-    source = "./modules/dynamodb"
+    source = "./modules/DynamoDB"
 }
 
 module "lambda"{
