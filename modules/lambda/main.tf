@@ -61,7 +61,7 @@ resource "aws_iam_role_policy" "dynamodb-policy" {
 
 resource "aws_lambda_function" "techx-lambda-function" {
   function_name = "techx-tf-lambda-function"
-  role          = "aws_iam_role.techx-lambda-assume-role-policy.id"
+  role          = aws_iam_role.techx-lambda-assume-role-policy.arn
   handler       = "lambda_handler"
   runtime       = "python3.9"
   filename      = "data.archive_file.techx-lambda-zip.output_path"
