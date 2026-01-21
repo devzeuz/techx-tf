@@ -28,7 +28,7 @@ resource "aws_iam_role" "techx-lambda-assume-role-policy" {
 
 resource "aws_iam_role_policy" "dynamodb-policy" {
     name = "techx-lambda-dynamodb-policy"
-    role = aws_iam_role.techx-lambda-assume-role-policy.arn
+    role = aws_iam_role.techx-lambda-assume-role-policy.id
 
     policy = jsonencode({
         Version = "2012-10-17"
