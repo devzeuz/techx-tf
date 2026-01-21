@@ -1,6 +1,6 @@
 resource "aws_dynamodb_table" "techx-main-table"{
     name           = "techx-main-table"
-    billing_mode   = "ON_DEMAND"
+    billing_mode   = "PAY_PER_REQUEST" //Billing mode is set to pay per request and provisoned 
 
     // defining the attributes or primary key
     hash_key       = "PK"
