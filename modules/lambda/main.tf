@@ -43,7 +43,7 @@ resource "aws_iam_role_policy" "dynamodb-policy" {
                     "dynamodb:BatchWriteItem"
                 ]
                 Effect   = "Allow"
-                Resource = "var.dynamodb-table-name"
+                Resource = "var.dynamodb-arn"
             },
             {
                 Action = [
