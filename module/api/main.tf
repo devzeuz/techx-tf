@@ -9,7 +9,7 @@ resource "aws_api_gateway_rest_api" "techx-tf-api-gateway" {
 resource "aws_api_gateway_resource" "techx-tf-courses-resource" {
     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
     parent_id   = aws_api_gateway_rest_api.techx-tf-api-gateway.id
-    path_part   = "/courses"
+    path_part   = "courses"
 }
 
 resource "aws_api_gateway_method" "techx-tf-courses-method" {
