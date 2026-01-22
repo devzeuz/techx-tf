@@ -1,7 +1,7 @@
 data "archive_file" "techx-lambda-zip" {
   type        = "zip"
-  source_file = "${path.module}/src/lambda-techx-function.py"
-  output_path = "${path.module}/src/lambda-techx-function.zip"
+  source_file = "${path.module}/lambda/src/lambda-techx-function.py"
+  output_path = "${path.module}/lambda/src/lambda-techx-function.zip"
 }
 
 // AWS IAM role and trust policy for the for lambda
