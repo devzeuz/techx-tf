@@ -33,5 +33,5 @@ resource "aws_api_gateway_integration" "techx-tf-courses-integration" {
     http_method = aws_api_gateway_method.techx-tf-courses-method.http_method
     integration_http_method = "POST" // API gateway POST the frontend request to lambda therefor invoking it in the process
     type                    = "AWS_PROXY"
-    uri                     = aws_lambda_function.techx-lambda-function.invoke_arn
+    uri                     = var.lambda-invoke-arn
 }
