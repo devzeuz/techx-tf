@@ -1,6 +1,6 @@
 data "archive_file" "techx-lambda-zip" {
   type        = "zip"
-  source_file = "${path.module}/src/lambda-techx-function.py"
+  source_file = "${path.module}/src/lambda-techx-function.py" //Concatenation here was done correctly.
   output_path = "${path.module}/src/lambda-techx-function.zip"
 }
 
@@ -43,7 +43,7 @@ resource "aws_iam_role_policy" "dynamodb-policy" {
                     "dynamodb:BatchWriteItem"
                 ]
                 Effect   = "Allow"
-                Resource = "*"
+                Resource = var.dynamodb-arn
             },
             {
                 Action = [
@@ -60,7 +60,7 @@ resource "aws_iam_role_policy" "dynamodb-policy" {
 
 
 resource "aws_lambda_function" "techx-lambda-function" {
-  filename      = data.archive_file.techx-lambda-zip.output_path
+  filename      = data.archive_file.techx-lambda-zip.output_path // Been getting error that .output_path does not exist. The reason is simple "" should not be used for terraform attribute reference.
   function_name = "techx-tf-lambda-function"
   role          = aws_iam_role.techx-lambda-assume-role-policy.arn
   handler       = "lambda_handler"
