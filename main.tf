@@ -6,5 +6,10 @@ module "lambda" {
   source              = "./module/lambda"
   dynamodb-table-name = module.dynamodb.dynamodb-table-name
   dynamodb-arn        = module.dynamodb.dynamodb-arn
+  api-gateway-source-arn = module.api.apiSourceArn
 }
 
+module "api" {
+  source = "./module/api"
+  lambda-invoke-arn = module.lambda.invoke_arn
+}

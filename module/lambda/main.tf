@@ -58,6 +58,14 @@ resource "aws_iam_role_policy" "dynamodb-policy" {
     })
 }
 
+resource "aws_lambda_permission" "techxApi-lambda-permission" {
+    statement_id  = "AllowAPIGatewayInvoke"
+    action        = "lambda:InvokeFunction"
+    function_name = aws_lambda_function.techx-lambda-function.function_name
+    principal     = "apigateway.amazonaws.com"
+    source_arn    = var.api-gateway-source-arn // I will be getting the source ARN from this method, that goes in the lambda permission.
+}
+
 
 resource "aws_lambda_function" "techx-lambda-function" {
   filename      = data.archive_file.techx-lambda-zip.output_path // Been getting error that .output_path does not exist. The reason is simple "" should not be used for terraform attribute reference.
