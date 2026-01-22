@@ -1,6 +1,6 @@
 data "archive_file" "techx-lambda-zip" {
   type        = "zip"
-  source_dir = "${path.module}/lambda-techx-function"
+  source_dir = "${path.module}/lambda-techx-function.py"
   output_path = "${path.module}/lambda-techx-function.zip"
 }
 
