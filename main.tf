@@ -1,10 +1,10 @@
-module "dynamodb"{
-    source = "./modules/DynamoDB"
+module "dynamodb" {
+  source = "./module/DynamoDB"
 }
 
-module "lambda"{
-    source = "./modules/lambda"
-    dynamodb-table-name = module.dynamodb.dynamodb-table-name
-    dynamodb-arn = module.dynamodb.dynamodb-arn
+module "lambda" {
+  source              = "./module/lambda"
+  dynamodb-table-name = module.dynamodb.dynamodb-table-name
+  dynamodb-arn        = module.dynamodb.dynamodb-arn
 }
 
