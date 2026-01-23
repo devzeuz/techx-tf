@@ -63,7 +63,7 @@ resource "aws_lambda_permission" "techxApi-lambda-permission" {
     action        = "lambda:InvokeFunction"
     function_name = aws_lambda_function.techx-lambda-function.function_name
     principal     = "apigateway.amazonaws.com"
-    source_arn    = var.api-gateway-source-arn // I will be getting the source ARN from this method, that goes in the lambda permission.
+    source_arn    = "${var.api-gateway-source-arn}/*/GET/courses" // I will be getting the source ARN from this method, that goes in the lambda permission.
 }
 
 // Lambda function 
