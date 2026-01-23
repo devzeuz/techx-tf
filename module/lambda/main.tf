@@ -66,7 +66,7 @@ resource "aws_lambda_permission" "techxApi-lambda-permission" {
     source_arn    = var.api-gateway-source-arn // I will be getting the source ARN from this method, that goes in the lambda permission.
 }
 
-
+// Lambda function 
 resource "aws_lambda_function" "techx-lambda-function" {
   filename      = data.archive_file.techx-lambda-zip.output_path // Been getting error that .output_path does not exist. The reason is simple "" should not be used for terraform attribute reference.
   function_name = "techx-tf-lambda-function"
@@ -80,3 +80,7 @@ resource "aws_lambda_function" "techx-lambda-function" {
     Project     = "TechX"
   }
 }
+
+
+
+

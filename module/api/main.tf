@@ -37,3 +37,28 @@ resource "aws_api_gateway_integration" "techx-tf-courses-integration" {
     type                    = "AWS_PROXY"
     uri                     = var.lambda-invoke-arn
 }
+
+// API deployment to stage
+
+resource "aws_api_gateway_deployment" "techx-tf-api-deploment" {
+    depends_on = [aws_api_gateway_integration.techx-tf-courses-integration] // to make sure the integration is created before deployment
+    rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
+    
+        triggers = {
+        redeployment = sha1(jsonencode([
+                aws_api_gateway_resource.techx-tf-courses-resource.id,
+                aws_api_gateway_method.techx-tf-courses-method.id,
+                aws_api_gateway_integration.techx-tf-courses-integration.id
+            ]))
+        }
+
+    lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "aws_api_gateway_stage" "techx-tf-api-stage" {
+ deployment_id = aws_api_gateway_deployment.techx-tf-api-deploment.id
+  rest_api_id   = aws_api_gateway_rest_api.techx-tf-api-gateway.id
+  stage_name    = "dev"
+}
