@@ -6,19 +6,20 @@ resource "aws_api_gateway_rest_api" "techx-tf-api-gateway" {
     }
 }
 
+// Resources for API gateway
 resource "aws_api_gateway_resource" "techx-tf-courses-resource" {
     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
-    parent_id   = aws_api_gateway_rest_api.techx-tf-api-gateway.root_resource_id // root resource id represent the / aprt of the rest api
+    parent_id   = aws_api_gateway_rest_api.techx-tf-api-gateway.root_resource_id // root resource id represent the / part of the rest api
     path_part   = "courses"
 }
 
-output "root_resource_id"{
-    value = aws_api_gateway_rest_api.techx-tf-api-gateway.root_resource_id
+resource "aws_api_gateway_resource" "techx-tf-id-resource" {
+    rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
+    parent_id   = aws_api_gateway_resource.techx-tf-courses-resource.root_resource_id // root resource id represent the / part of the rest api
+    path_part   = "{id}"
 }
 
-output "restApi_id"{
-    value = aws_api_gateway_rest_api.techx-tf-api-gateway.id
-}
+// Resources for API gateway
 
 resource "aws_api_gateway_method" "techx-tf-courses-method" {
     rest_api_id   = aws_api_gateway_rest_api.techx-tf-api-gateway.id
@@ -38,7 +39,7 @@ resource "aws_api_gateway_integration" "techx-tf-courses-integration" {
     uri                     = var.lambda-invoke-arn
 }
 
-// this method response is subject to chanage, adding headers 
+// this method response is subject to chanage, *adding headers* 
 resource "aws_api_gateway_method_response" "techx-tf-courses-method-response" {
     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
     resource_id = aws_api_gateway_resource.techx-tf-courses-resource.id
