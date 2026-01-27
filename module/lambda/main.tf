@@ -58,6 +58,8 @@ resource "aws_iam_role_policy" "dynamodb-policy" {
     })
 }
 
+
+// Lambda resource based policy (permission)
 resource "aws_lambda_permission" "techxApi-lambda-permission" {
     statement_id  = "AllowAPIGatewayInvoke"
     action        = "lambda:InvokeFunction"
@@ -71,7 +73,7 @@ resource "aws_lambda_function" "techx-lambda-function" {
   filename      = data.archive_file.techx-lambda-zip.output_path // Been getting error that .output_path does not exist. The reason is simple "" should not be used for terraform attribute reference.
   function_name = "techx-tf-lambda-function"
   role          = aws_iam_role.techx-lambda-assume-role-policy.arn
-  handler       = "lambda_handler"
+  handler       = "${var.lambda-function-filename}.lambda_handler"
   runtime       = "python3.9"
     //What if i dont define the other configuration?
 

@@ -11,3 +11,7 @@ variable "dynamodb-arn" {
 variable "api-gateway-source-arn" {
     type = string
 }
+
+variable "lambda-function-filename" {
+    default = "lambda-techx-function"
+}
