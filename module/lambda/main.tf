@@ -65,10 +65,20 @@ resource "aws_lambda_permission" "techxApi-lambda-permission" {
     action        = "lambda:InvokeFunction"
     function_name = aws_lambda_function.techx-lambda-function.function_name
     principal     = "apigateway.amazonaws.com"
-    source_arn    = "${var.api-gateway-source-arn}/*/GET/courses" // I will be getting the source ARN from this method, that goes in the lambda permission.
+    source_arn    = "${var.api-gateway-source-arn}/*/GET/courses" // The source ARN must match Executions ARN coming from API gateway. 
 }
 
-// Lambda function 
+resource "aws_lambda_permission" "techxApi-lambda-permission" {
+    statement_id  = "AllowAPIGatewayInvoke"
+    action        = "lambda:InvokeFunction"
+    function_name = aws_lambda_function.techx-lambda-function.function_name
+    principal     = "apigateway.amazonaws.com"
+    source_arn    = "${var.api-gateway-source-arn}/*/GET/courses/{id}" // The source ARN must match Executions ARN coming from API gateway. 
+}
+
+// Lambda resource based policy (permission)
+
+// Lambda function configuration
 resource "aws_lambda_function" "techx-lambda-function" {
   filename      = data.archive_file.techx-lambda-zip.output_path // Been getting error that .output_path does not exist. The reason is simple "" should not be used for terraform attribute reference.
   function_name = "techx-tf-lambda-function"

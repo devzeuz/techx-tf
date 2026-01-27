@@ -38,6 +38,7 @@ resource "aws_api_gateway_method" "techx-tf-id-method" {
 // API Resource Methods
 
 
+// API Method Integration 
 resource "aws_api_gateway_integration" "techx-tf-courses-integration" {
     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
     resource_id = aws_api_gateway_resource.techx-tf-courses-resource.id
@@ -46,6 +47,17 @@ resource "aws_api_gateway_integration" "techx-tf-courses-integration" {
     type                    = "AWS_PROXY"
     uri                     = var.lambda-invoke-arn
 }
+
+resource "aws_api_gateway_integration" "techx-tf-id-integration" {
+    rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
+    resource_id = aws_api_gateway_resource.techx-tf-id-resource.id
+    http_method = aws_api_gateway_method.techx-tf-id-method.http_method
+    integration_http_method = "POST"
+    type                    = "AWS_PROXY"
+    uri                     = var.lambda-invoke-arn
+}
+// API Method Integration
+
 
 // this method response is subject to chanage, *adding headers* 
 resource "aws_api_gateway_method_response" "techx-tf-courses-method-response" {
