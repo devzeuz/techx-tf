@@ -15,7 +15,7 @@ resource "aws_api_gateway_resource" "techx-tf-courses-resource" {
 
 resource "aws_api_gateway_resource" "techx-tf-id-resource" {
     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
-    parent_id   = aws_api_gateway_resource.techx-tf-courses-resource.root_resource_id // root resource id represent the / part of the rest api
+    parent_id   = aws_api_gateway_resource.techx-tf-courses-resource.id // root resource id represent the / part of the rest api
     path_part   = "{id}"
 }
 
