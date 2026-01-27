@@ -60,7 +60,7 @@ resource "aws_iam_role_policy" "dynamodb-policy" {
 
 
 // Lambda resource based policy (permission)
-resource "aws_lambda_permission" "techxApi-lambda-permission" {
+resource "aws_lambda_permission" "techxApi-lambda-courses-permission" {
     statement_id  = "AllowAPIGatewayInvoke"
     action        = "lambda:InvokeFunction"
     function_name = aws_lambda_function.techx-lambda-function.function_name
@@ -68,7 +68,7 @@ resource "aws_lambda_permission" "techxApi-lambda-permission" {
     source_arn    = "${var.api-gateway-source-arn}/*/GET/courses" // The source ARN must match Executions ARN coming from API gateway. 
 }
 
-resource "aws_lambda_permission" "techxApi-lambda-permission" {
+resource "aws_lambda_permission" "techxApi-lambda-courses-id-permission" {
     statement_id  = "AllowAPIGatewayInvoke"
     action        = "lambda:InvokeFunction"
     function_name = aws_lambda_function.techx-lambda-function.function_name
