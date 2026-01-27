@@ -42,7 +42,7 @@ resource "aws_api_gateway_integration" "techx-tf-courses-integration" {
     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
     resource_id = aws_api_gateway_resource.techx-tf-courses-resource.id
     http_method = aws_api_gateway_method.techx-tf-courses-method.http_method
-    # integration_http_method = "POST" // API gateway POST the frontend request to lambda therefor invoking it in the process, this is why integration HTTP method is set to post
+    integration_http_method = "POST" // API gateway POST the frontend request to lambda therefor invoking it in the process, this is why integration HTTP method is set to post
     type                    = "AWS_PROXY"
     uri                     = var.lambda-invoke-arn
 }
