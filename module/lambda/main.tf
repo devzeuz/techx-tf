@@ -69,7 +69,7 @@ resource "aws_lambda_permission" "techxApi-lambda-courses-permission" {
 }
 
 resource "aws_lambda_permission" "techxApi-lambda-courses-id-permission" {
-    statement_id  = "courses-id-AllowAPIGatewayInvoke"
+    statement_id  = "courses-id-AllowAPIGatewayInvoke" //* Subject to change, i have to use random hex numbers*
     action        = "lambda:InvokeFunction"
     function_name = aws_lambda_function.techx-lambda-function.function_name
     principal     = "apigateway.amazonaws.com"

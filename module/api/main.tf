@@ -6,7 +6,7 @@ resource "aws_api_gateway_rest_api" "techx-tf-api-gateway" {
     }
 }
 
-// Resources for API gateway
+// API Gateway Resource
 resource "aws_api_gateway_resource" "techx-tf-courses-resource" {
     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
     parent_id   = aws_api_gateway_rest_api.techx-tf-api-gateway.root_resource_id // root resource id represent the / part of the rest api
@@ -18,8 +18,7 @@ resource "aws_api_gateway_resource" "techx-tf-id-resource" {
     parent_id   = aws_api_gateway_resource.techx-tf-courses-resource.id // root resource id represent the / part of the rest api
     path_part   = "{id}"
 }
-
-// Resources for API gateway
+// API Gateway Resource
 
 // API resource Methods
 resource "aws_api_gateway_method" "techx-tf-courses-method" {
@@ -59,25 +58,40 @@ resource "aws_api_gateway_integration" "techx-tf-id-integration" {
 // API Method Integration
 
 
-// this method response is subject to chanage, *adding headers* 
+// Method Response
 resource "aws_api_gateway_method_response" "techx-tf-courses-method-response" {
     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
-    resource_id = aws_api_gateway_resource.techx-tf-courses-resource.id
+    resource_id = aws_api_gateway_resource.techx-tf-courses-method.id
     http_method = aws_api_gateway_method.techx-tf-courses-method.http_method
-    status_code = "200"
+    status_code = "200"  
 }
 
-// API deployment to stage
+resource "aws_api_gateway_method_response" "techx-tf-id-method-response" {
+    rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
+    resource_id = aws_api_gateway_resource.techx-tf-id-method.id
+    http_method = aws_api_gateway_method.techx-tf-id-method.http_method
+    status_code = "200"
+}
+// Method Response
 
+
+
+// API Deployment => Stage
 resource "aws_api_gateway_deployment" "techx-tf-api-deploment" {
     depends_on = [aws_api_gateway_integration.techx-tf-courses-integration] // to make sure the integration is created before deployment
     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
     
         triggers = {
         redeployment = sha1(jsonencode([
+                // /courses resource deployment trigger
                 aws_api_gateway_resource.techx-tf-courses-resource.id,
                 aws_api_gateway_method.techx-tf-courses-method.id,
-                aws_api_gateway_integration.techx-tf-courses-integration.id
+                aws_api_gateway_integration.techx-tf-courses-integration.id,
+
+                // /courses/{id} resource deployment trigger
+                aws_api_gateway_resource.techx-tf-id-resource.id,
+                aws_api_gateway_method.techx-tf-id-method.id,
+                aws_api_gateway_integration.techx-tf-id-integration.id
             ]))
         }
 
