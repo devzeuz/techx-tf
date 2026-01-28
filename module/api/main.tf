@@ -18,6 +18,12 @@ resource "aws_api_gateway_resource" "techx-tf-id-resource" {
     parent_id   = aws_api_gateway_resource.techx-tf-courses-resource.id // root resource id represent the / part of the rest api
     path_part   = "{id}"
 }
+
+resource "aws_api_gateway_resource" "techx-tf-user-resource" {
+    rest_api_id  = aws_api_gateway_rest_api.techx-tf-api-gateway.id
+    parent_id = aws_api_gateway_rest_api.techx-tf-api-gateway.root_resource_id
+    path_part = "user"
+}
 // API Gateway Resource
 
 // API resource Methods
@@ -32,6 +38,13 @@ resource "aws_api_gateway_method" "techx-tf-id-method" {
     rest_api_id   = aws_api_gateway_rest_api.techx-tf-api-gateway.id
     resource_id   = aws_api_gateway_resource.techx-tf-id-resource.id
     http_method = "GET"
+    authorization = "NONE"
+}
+
+resource "aws_api_gateway_method" "techx-tf-user-method" {
+    rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
+    resource_id = aws_api_gateway_resource.techx-tf-user-resource.id
+    http_method = "POST"
     authorization = "NONE"
 }
 // API Resource Methods
