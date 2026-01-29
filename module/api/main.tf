@@ -41,7 +41,7 @@ resource "aws_api_gateway_method" "techx-tf-id-method" {
     authorization = "NONE"
 }
 
-// USER Resource Methods
+        // USER Resource Methods
 resource "aws_api_gateway_method" "techx-tf-user-post-method" {
     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
     resource_id = aws_api_gateway_resource.techx-tf-user-resource.id
