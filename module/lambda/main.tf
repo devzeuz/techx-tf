@@ -75,6 +75,16 @@ resource "aws_lambda_permission" "techxApi-lambda-courses-id-permission" {
     principal     = "apigateway.amazonaws.com"
     source_arn    = "${var.api-gateway-source-arn}/*/GET/courses/{id}" // The source ARN must match Executions ARN coming from API gateway. 
 }
+
+resource "aws_lambda_permission" "techxApi-lambda-user-permission" {
+    statement_id  = "user-get-AllowAPIGatewayInvoke" //* Subject to change, i have to use random hex numbers*
+    action        = "lambda:InvokeFunction"
+    function_name = aws_lambda_function.techx-lambda-function.function_name
+    principal     = "apigateway.amazonaws.com"
+    source_arn    = "${var.api-gateway-source-arn}/*/*/user" // The source ARN must match Executions ARN coming from API gateway. 
+}
+
+
 // Lambda resource based policy (permission)
 
 
