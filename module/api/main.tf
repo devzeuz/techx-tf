@@ -76,26 +76,27 @@ resource "aws_api_gateway_integration" "techx-tf-id-integration" {
     type                    = "AWS_PROXY"
     uri                     = var.lambda-invoke-arn
 }
+
+               // User resource integration for GET and POST method
+resource "aws_api_gateway_integration" "techx-tf-user-get-integration" {
+    rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
+    resource_id = aws_api_gateway_resource.techx-tf-user-resource.id
+    http_method = aws_api_gateway_method.techx-tf-user-get-method.http_method
+    integration_http_method = "POST"
+    type                    = "AWS_PROXY"
+    uri                     = var.lambda-invoke-arn
+}
+
+resource "aws_api_gateway_integration" "techx-tf-user-post-integration" {
+    rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
+    resource_id = aws_api_gateway_resource.techx-tf-user-resource.id
+    http_method = aws_api_gateway_method.techx-tf-user-post-method.http_method
+    integration_http_method = "POST"
+    type                    = "AWS_PROXY"
+    uri                     = var.lambda-invoke-arn
+}
+
 // API Method Integration
-
-
-// Method Response
-resource "aws_api_gateway_method_response" "techx-tf-courses-method-response" {
-    rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
-    resource_id = aws_api_gateway_resource.techx-tf-courses-resource.id // Why does this point directly to the resource?
-    http_method = aws_api_gateway_method.techx-tf-courses-method.http_method
-    status_code = "200"  
-}
-
-resource "aws_api_gateway_method_response" "techx-tf-id-method-response" {
-    rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
-    resource_id = aws_api_gateway_resource.techx-tf-id-resource.id
-    http_method = aws_api_gateway_method.techx-tf-id-method.http_method
-    status_code = "200"
-}
-// Method Response
-
-
 
 // API Deployment => Stage
 resource "aws_api_gateway_deployment" "techx-tf-api-deploment" {
