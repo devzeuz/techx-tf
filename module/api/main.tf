@@ -60,7 +60,6 @@ resource "aws_api_gateway_integration" "techx-tf-user-options-integration" {
     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
     resource_id = aws_api_gateway_resource.techx-tf-user-resource.id
     http_method = "OPTIONS"
-    integration_http_method = "POST"
     type                    = "MOCK"
 }
 // API Resource Methods
