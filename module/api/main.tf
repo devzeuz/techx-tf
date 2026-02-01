@@ -134,7 +134,8 @@ resource "aws_api_gateway_deployment" "techx-tf-api-deploment" {
                 aws_api_gateway_integration.techx-tf-user-post-integration.id,
                 aws_api_gateway_method.techx-tf-user-get-method.id,
                 aws_api_gateway_integration.techx-tf-user-get-integration.id,
-                aws_api_gateway_integration.techx-tf-user-options-integration.id,
+                aws_api_gateway_method.techx-tf-user-method.id,
+                aws_api_gateway_integration.techx-tf-user-options-integration.id
             ]))
         }
 
