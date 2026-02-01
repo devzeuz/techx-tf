@@ -116,13 +116,19 @@ resource "aws_api_gateway_deployment" "techx-tf-api-deploment" {
                 aws_api_gateway_resource.techx-tf-courses-resource.id,
                 aws_api_gateway_method.techx-tf-courses-method.id,
                 aws_api_gateway_integration.techx-tf-courses-integration.id,
-                
-
 
                 // /courses/{id} resource deployment trigger
                 aws_api_gateway_resource.techx-tf-id-resource.id,
                 aws_api_gateway_method.techx-tf-id-method.id,
-                aws_api_gateway_integration.techx-tf-id-integration.id
+                aws_api_gateway_integration.techx-tf-id-integration.id,
+
+                // /user resource deployment trigger
+                aws_api_gateway_resource.techx-tf-user-resource.id,
+                aws_api_gateway_method.techx-tf-user-post-method.id,
+                aws_api_gateway_integration.techx-tf-user-post-integration.id,
+                aws_api_gateway_method.techx-tf-user-get-method.id,
+                aws_api_gateway_integration.techx-tf-user-get-integration.id,
+                aws_api_gateway_integration.techx-tf-user-options-integration.id,
             ]))
         }
 
