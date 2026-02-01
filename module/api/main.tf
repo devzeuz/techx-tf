@@ -59,7 +59,7 @@ resource "aws_api_gateway_method" "techx-tf-user-get-method" {
 resource "aws_api_gateway_integration" "techx-tf-user-options-integration" {
     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
     resource_id = aws_api_gateway_resource.techx-tf-user-resource.id
-    http_method = "GET"
+    http_method = "OPTIONS"
     integration_http_method = "POST"
     type                    = "MOCK"
 }
@@ -116,6 +116,8 @@ resource "aws_api_gateway_deployment" "techx-tf-api-deploment" {
                 aws_api_gateway_resource.techx-tf-courses-resource.id,
                 aws_api_gateway_method.techx-tf-courses-method.id,
                 aws_api_gateway_integration.techx-tf-courses-integration.id,
+                
+
 
                 // /courses/{id} resource deployment trigger
                 aws_api_gateway_resource.techx-tf-id-resource.id,
