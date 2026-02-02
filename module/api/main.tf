@@ -188,7 +188,7 @@ resource "aws_api_gateway_integration_response" "techx-tf-options-integration-re
 }
 
 // /courses/{id} resource OPTIONS method integration-response
-resource "aws_api_gateway_integration_response" "techx-tf-id-options-integration-method" {
+resource "aws_api_gateway_integration_response" "techx-tf-id-options-integration-response" {
     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
     resource_id = aws_api_gateway_resource.techx-tf-id-resource.id
     http_method = aws_api_gateway_method.techx-tf-id-options-method.http_method

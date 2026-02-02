@@ -13,3 +13,7 @@ module "api" {
   source = "./module/api"
   lambda-invoke-arn = module.lambda.invoke_arn
 }
+
+module "cognito" {
+  source = "./module/cognito"
+}
