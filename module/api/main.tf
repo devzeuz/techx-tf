@@ -130,7 +130,7 @@ resource "aws_api_gateway_method_response" "techx-tf-user-options-method-respons
 // API gateway METHOD responses
 
 //API gateway INTEGRATION responses
-resource "aws_api_gateway_integration_response" "techx-tf-options-integration-response-method" {
+resource "aws_api_gateway_integration_response" "techx-tf-options-integration-response" {
     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
     resource_id = aws_api_gateway_resource.techx-tf-user-resource.id
     http_method = aws_api_gateway_method.techx-tf-user-method.http_method
@@ -171,7 +171,7 @@ resource "aws_api_gateway_deployment" "techx-tf-api-deploment" {
                 aws_api_gateway_method.techx-tf-user-method.id,
                 aws_api_gateway_integration.techx-tf-user-options-integration.id,
                 aws_api_gateway_method_response.techx-tf-user-options-method-response.id,
-                aws_api_gateway_integration_response.techx-tf-options-integration-response-method.id
+                aws_api_gateway_integration_response.techx-tf-options-integration-response.id
             ]))
         }
 
