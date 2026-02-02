@@ -42,17 +42,17 @@ resource "aws_api_gateway_method" "techx-tf-id-method" {
 }
 
         // USER Resource Methods
-resource "aws_api_gateway_method" "techx-tf-user-post-method" {
-    rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
-    resource_id = aws_api_gateway_resource.techx-tf-user-resource.id
-    http_method = "POST"
-    authorization = "NONE"
-}
+# resource "aws_api_gateway_method" "techx-tf-user-post-method" {
+#     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
+#     resource_id = aws_api_gateway_resource.techx-tf-user-resource.id
+#     http_method = "POST"
+#     authorization = "NONE"
+# }
 
-resource "aws_api_gateway_method" "techx-tf-user-get-method" {
+resource "aws_api_gateway_method" "techx-tf-user-method" {
      rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
      resource_id = aws_api_gateway_resource.techx-tf-user-resource.id
-     http_method = "GET"
+     http_method = "'GET,POST'"
      authorization = "NONE" // NONE is a placeholder, there is actually auth token expected. since access (to DynamoDB) is involved.
 }
              // OPTIONS method for /user resource
@@ -172,6 +172,7 @@ resource "aws_api_gateway_method_response" "techx-tf-courses-options-method-resp
 }
 // API gateway METHOD responses
 
+
 //API gateway INTEGRATION responses
 //user resource OPTIONS method integration-response
 resource "aws_api_gateway_integration_response" "techx-tf-user-options-integration-response" {
@@ -191,7 +192,7 @@ resource "aws_api_gateway_integration_response" "techx-tf-user-options-integrati
 resource "aws_api_gateway_integration_response" "techx-tf-id-options-integration-response" {
     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
     resource_id = aws_api_gateway_resource.techx-tf-id-resource.id
-    http_method = aws_api_gateway_method.techx-tf-id-options-method.http_method
+    http_method = aws_api_gateway_method.techx-tf-id-method.http_method
     status_code = aws_api_gateway_method_response.techx-tf-id-options-method-response.status_code
 
     response_parameters = {
@@ -204,7 +205,7 @@ resource "aws_api_gateway_integration_response" "techx-tf-id-options-integration
 resource "aws_api_gateway_integration_response" "techx-tf-courses-options-integration-response" {
     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
     resource_id = aws_api_gateway_resource.techx-tf-courses-resource.id
-    http_method = aws_api_gateway_method.techx-tf-courses-options-method.http_method
+    http_method = aws_api_gateway_method.techx-tf-courses-method.http_method
     status_code = aws_api_gateway_method_response.techx-tf-courses-options-method-response.status_code
 
     response_parameters = {
