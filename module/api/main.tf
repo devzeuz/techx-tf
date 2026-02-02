@@ -281,5 +281,5 @@ resource "aws_api_gateway_deployment" "techx-tf-api-deploment" {
 resource "aws_api_gateway_stage" "techx-tf-api-stage" {
  deployment_id = aws_api_gateway_deployment.techx-tf-api-deploment.id
   rest_api_id   = aws_api_gateway_rest_api.techx-tf-api-gateway.id
-  stage_name    = "dev"
+  stage_name    = "development"
 }
