@@ -42,17 +42,17 @@ resource "aws_api_gateway_method" "techx-tf-id-method" {
 }
 
 // USER Resource Methods
-# resource "aws_api_gateway_method" "techx-tf-user-post-method" {
-#     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
-#     resource_id = aws_api_gateway_resource.techx-tf-user-resource.id
-#     http_method = "POST"
-#     authorization = "NONE"
-# }
+resource "aws_api_gateway_method" "techx-tf-user-post-method" {
+    rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
+    resource_id = aws_api_gateway_resource.techx-tf-user-resource.id
+    http_method = "POST"
+    authorization = "NONE"
+}
 
-resource "aws_api_gateway_method" "techx-tf-user-method" {
+resource "aws_api_gateway_method" "techx-tf-user-get-method" {
      rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
      resource_id = aws_api_gateway_resource.techx-tf-user-resource.id
-     http_method =[ "GET", "POST" ]
+     http_method ="GET"
      authorization = "NONE" // NONE is a placeholder, there is actually auth token expected. since access (to DynamoDB) is involved.
 }
              // OPTIONS method for /user resource
@@ -101,7 +101,7 @@ resource "aws_api_gateway_integration" "techx-tf-id-integration" {
 }
 
                // User resource integration for GET and POST method
-resource "aws_api_gateway_integration" "techx-tf-user-integration" {
+resource "aws_api_gateway_integration" "techx-tf-user-get-integration" {
     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
     resource_id = aws_api_gateway_resource.techx-tf-user-resource.id
     http_method = aws_api_gateway_method.techx-tf-user-method.http_method
@@ -110,21 +110,37 @@ resource "aws_api_gateway_integration" "techx-tf-user-integration" {
     uri                     = var.lambda-invoke-arn
 }
 
-# resource "aws_api_gateway_integration" "techx-tf-user-post-integration" {
-#     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
-#     resource_id = aws_api_gateway_resource.techx-tf-user-resource.id
-#     http_method = aws_api_gateway_method.techx-tf-user-post-method.http_method
-#     integration_http_method = "POST"
-#     type                    = "AWS_PROXY"
-#     uri                     = var.lambda-invoke-arn
-# }
+resource "aws_api_gateway_integration" "techx-tf-user-post-integration" {
+    rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
+    resource_id = aws_api_gateway_resource.techx-tf-user-resource.id
+    http_method = aws_api_gateway_method.techx-tf-user-post-method.http_method
+    integration_http_method = "POST"
+    type                    = "AWS_PROXY"
+    uri                     = var.lambda-invoke-arn
+}
 
-                  // OPTIONS method integratiion for /user resource
+// OPTIONS method integratiion for /user resource
 resource "aws_api_gateway_integration" "techx-tf-user-options-integration" {
     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
     resource_id = aws_api_gateway_resource.techx-tf-user-resource.id
-    http_method = aws_api_gateway_method.techx-tf-user-method.http_method
+    http_method = aws_api_gateway_method.techx-tf-user-options-method.http_method
     type                    = "MOCK"
+}
+
+// OPTIONS method integratiion for /courses resource
+resource "aws_api_gateway_integration" "techx-tf-courses-options-integration" {
+    rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
+    resource_id = aws_api_gateway_resource.techx-tf-courses-resource.id
+    http_method = aws_api_gateway_method.techx-tf-courses-options-method.http_method
+    type = "MOCK"
+}
+
+// OPTIONS method integratiion for /id resource
+resource "aws_api_gateway_integration" "techx-tf-id-options-integration" {
+    rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
+    resource_id = aws_api_gateway_resource.techx-tf-id-resource.id
+    http_method = aws_api_gateway_method.techx-tf-id-options-method.http_method
+    type = "MOCK"
 }
 // API Method Integration
 
@@ -133,7 +149,7 @@ resource "aws_api_gateway_integration" "techx-tf-user-options-integration" {
 resource "aws_api_gateway_method_response" "techx-tf-user-options-method-response" {
     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
     resource_id = aws_api_gateway_resource.techx-tf-user-resource.id
-    http_method = aws_api_gateway_method.techx-tf-user-method.http_method
+    http_method = aws_api_gateway_method.techx-tf-user-options-method.http_method
     status_code = "200"
 
     response_parameters = {
@@ -178,7 +194,7 @@ resource "aws_api_gateway_method_response" "techx-tf-courses-options-method-resp
 resource "aws_api_gateway_integration_response" "techx-tf-user-options-integration-response" {
     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
     resource_id = aws_api_gateway_resource.techx-tf-user-resource.id
-    http_method = aws_api_gateway_method.techx-tf-user-method.http_method
+    http_method = aws_api_gateway_method.techx-tf-user-options-method.http_method
     status_code = aws_api_gateway_method_response.techx-tf-user-options-method-response.status_code
 
     response_parameters = {
@@ -192,7 +208,7 @@ resource "aws_api_gateway_integration_response" "techx-tf-user-options-integrati
 resource "aws_api_gateway_integration_response" "techx-tf-id-options-integration-response" {
     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
     resource_id = aws_api_gateway_resource.techx-tf-id-resource.id
-    http_method = aws_api_gateway_method.techx-tf-id-method.http_method
+    http_method = aws_api_gateway_method.techx-tf-id-options-method.http_method
     status_code = aws_api_gateway_method_response.techx-tf-id-options-method-response.status_code
 
     response_parameters = {
@@ -205,7 +221,7 @@ resource "aws_api_gateway_integration_response" "techx-tf-id-options-integration
 resource "aws_api_gateway_integration_response" "techx-tf-courses-options-integration-response" {
     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
     resource_id = aws_api_gateway_resource.techx-tf-courses-resource.id
-    http_method = aws_api_gateway_method.techx-tf-courses-method.http_method
+    http_method = aws_api_gateway_method.techx-tf-courses-options-method.http_method
     status_code = aws_api_gateway_method_response.techx-tf-courses-options-method-response.status_code
 
     response_parameters = {
@@ -219,7 +235,6 @@ resource "aws_api_gateway_integration_response" "techx-tf-courses-options-integr
 
 // API Deployment => Stage
 resource "aws_api_gateway_deployment" "techx-tf-api-deploment" {
-    depends_on = [aws_api_gateway_integration.techx-tf-courses-integration] // to make sure the integration is created before deployment
     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
     
         triggers = {
@@ -227,8 +242,9 @@ resource "aws_api_gateway_deployment" "techx-tf-api-deploment" {
                 // /courses resource deployment trigger
                 aws_api_gateway_resource.techx-tf-courses-resource.id,
                 aws_api_gateway_method.techx-tf-courses-method.id,
-                aws_api_gateway_integration.techx-tf-courses-integration.id,
                 aws_api_gateway_method.techx-tf-courses-options-method.id,
+                aws_api_gateway_integration.techx-tf-courses-integration.id,
+                aws_api_gateway_integration.techx-tf-courses-options-integration.id,
                 aws_api_gateway_method_response.techx-tf-courses-options-method-response.id,
                 aws_api_gateway_integration_response.techx-tf-courses-options-integration-response.id,
 
@@ -236,21 +252,23 @@ resource "aws_api_gateway_deployment" "techx-tf-api-deploment" {
                 // /courses/{id} resource deployment trigger
                 aws_api_gateway_resource.techx-tf-id-resource.id,
                 aws_api_gateway_method.techx-tf-id-method.id,
-                aws_api_gateway_integration.techx-tf-id-integration.id,
                 aws_api_gateway_method.techx-tf-id-options-method.id,
+                aws_api_gateway_integration.techx-tf-id-integration.id,
+                aws_api_gateway_integration.techx-tf-id-options-integration.id,
                 aws_api_gateway_method_response.techx-tf-id-options-method-response.id,
                 aws_api_gateway_integration_response.techx-tf-id-options-integration-response.id,
 
+
                 // /user resource deployment trigger
                 aws_api_gateway_resource.techx-tf-user-resource.id,
-                # aws_api_gateway_method.techx-tf-user-post-method.id,
-                # aws_api_gateway_integration.techx-tf-user-post-integration.id,
-                aws_api_gateway_method.techx-tf-user-method.id,
-                aws_api_gateway_integration.techx-tf-user-integration.id,
-                aws_api_gateway_method.techx-tf-user-method.id,
+                aws_api_gateway_method.techx-tf-user-post-method.id,
+                aws_api_gateway_method.techx-tf-user-get-method.id,
+                aws_api_gateway_method.techx-tf-user-options-method.id,
+                aws_api_gateway_integration.techx-tf-user-get-integration.id,
+                aws_api_gateway_integration.techx-tf-user-post-integration.id,
                 aws_api_gateway_integration.techx-tf-user-options-integration.id,
                 aws_api_gateway_method_response.techx-tf-user-options-method-response.id,
-                aws_api_gateway_integration_response.techx-tf-options-integration-response.id
+                aws_api_gateway_integration_response.techx-tf-user-options-integration-response.id
             ]))
         }
 
