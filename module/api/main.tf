@@ -41,7 +41,7 @@ resource "aws_api_gateway_method" "techx-tf-id-method" {
     authorization = "NONE"
 }
 
-        // USER Resource Methods
+// USER Resource Methods
 # resource "aws_api_gateway_method" "techx-tf-user-post-method" {
 #     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
 #     resource_id = aws_api_gateway_resource.techx-tf-user-resource.id
@@ -56,7 +56,7 @@ resource "aws_api_gateway_method" "techx-tf-user-method" {
      authorization = "NONE" // NONE is a placeholder, there is actually auth token expected. since access (to DynamoDB) is involved.
 }
              // OPTIONS method for /user resource
-resource "aws_api_gateway_method" "techx-tf-user-method" {
+resource "aws_api_gateway_method" "techx-tf-user-options-method" {
     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
      resource_id = aws_api_gateway_resource.techx-tf-user-resource.id
      http_method = "OPTIONS"
@@ -101,23 +101,23 @@ resource "aws_api_gateway_integration" "techx-tf-id-integration" {
 }
 
                // User resource integration for GET and POST method
-resource "aws_api_gateway_integration" "techx-tf-user-get-integration" {
+resource "aws_api_gateway_integration" "techx-tf-user-integration" {
     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
     resource_id = aws_api_gateway_resource.techx-tf-user-resource.id
-    http_method = aws_api_gateway_method.techx-tf-user-get-method.http_method
+    http_method = aws_api_gateway_method.techx-tf-user-method.http_method
     integration_http_method = "POST"
     type                    = "AWS_PROXY"
     uri                     = var.lambda-invoke-arn
 }
 
-resource "aws_api_gateway_integration" "techx-tf-user-post-integration" {
-    rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
-    resource_id = aws_api_gateway_resource.techx-tf-user-resource.id
-    http_method = aws_api_gateway_method.techx-tf-user-post-method.http_method
-    integration_http_method = "POST"
-    type                    = "AWS_PROXY"
-    uri                     = var.lambda-invoke-arn
-}
+# resource "aws_api_gateway_integration" "techx-tf-user-post-integration" {
+#     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
+#     resource_id = aws_api_gateway_resource.techx-tf-user-resource.id
+#     http_method = aws_api_gateway_method.techx-tf-user-post-method.http_method
+#     integration_http_method = "POST"
+#     type                    = "AWS_PROXY"
+#     uri                     = var.lambda-invoke-arn
+# }
 
                   // OPTIONS method integratiion for /user resource
 resource "aws_api_gateway_integration" "techx-tf-user-options-integration" {
@@ -243,10 +243,10 @@ resource "aws_api_gateway_deployment" "techx-tf-api-deploment" {
 
                 // /user resource deployment trigger
                 aws_api_gateway_resource.techx-tf-user-resource.id,
-                aws_api_gateway_method.techx-tf-user-post-method.id,
-                aws_api_gateway_integration.techx-tf-user-post-integration.id,
-                aws_api_gateway_method.techx-tf-user-get-method.id,
-                aws_api_gateway_integration.techx-tf-user-get-integration.id,
+                # aws_api_gateway_method.techx-tf-user-post-method.id,
+                # aws_api_gateway_integration.techx-tf-user-post-integration.id,
+                aws_api_gateway_method.techx-tf-user-method.id,
+                aws_api_gateway_integration.techx-tf-user-integration.id,
                 aws_api_gateway_method.techx-tf-user-method.id,
                 aws_api_gateway_integration.techx-tf-user-options-integration.id,
                 aws_api_gateway_method_response.techx-tf-user-options-method-response.id,
