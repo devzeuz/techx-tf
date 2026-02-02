@@ -55,19 +55,12 @@ resource "aws_api_gateway_method" "techx-tf-user-get-method" {
      http_method = "GET"
      authorization = "NONE" // NONE is a placeholder, there is actually auth token expected. since access (to DynamoDB) is involved.
 }
-             // OPTIONS method/integration for /user resource
+             // OPTIONS method for /user resource
 resource "aws_api_gateway_method" "techx-tf-user-method" {
     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
      resource_id = aws_api_gateway_resource.techx-tf-user-resource.id
      http_method = "OPTIONS"
      authorization = "NONE"
-}
-
-resource "aws_api_gateway_integration" "techx-tf-user-options-integration" {
-    rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
-    resource_id = aws_api_gateway_resource.techx-tf-user-resource.id
-    http_method = aws_api_gateway_method.techx-tf-user-method.http_method
-    type                    = "MOCK"
 }
 // API Resource Methods
 
@@ -109,7 +102,48 @@ resource "aws_api_gateway_integration" "techx-tf-user-post-integration" {
     type                    = "AWS_PROXY"
     uri                     = var.lambda-invoke-arn
 }
+
+                  // OPTIONS method integratiion for /user resource
+resource "aws_api_gateway_integration" "techx-tf-user-options-integration" {
+    rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
+    resource_id = aws_api_gateway_resource.techx-tf-user-resource.id
+    http_method = aws_api_gateway_method.techx-tf-user-method.http_method
+    type                    = "MOCK"
+}
 // API Method Integration
+
+// API gateway METHOD responses
+
+         // OPTIONS, METHOD response
+resource "aws_api_gateway_method_response" "techx-tf-user-options-method-response" {
+    rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
+    resource_id = aws_api_gateway_resource.techx-tf-user-resource.id
+    http_method = aws_api_gateway_method.techx-tf-user-method.http_method
+    status_code = "200"
+
+    response_parameters = {
+        "method.response.header.Access-Control-Allow-Headers" = true,
+        "method.response.header.Access-Control-Allow-Methods" = true,
+        "method.response.header.Access-Control-Allow-Origin"  = true,
+    }
+}
+// API gateway METHOD responses
+
+//API gateway INTEGRATION responses
+resource "aws_api_gateway_integration_response" "techx-tf-options-integration-response-method" {
+    rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
+    resource_id = aws_api_gateway_resource.techx-tf-user-resource.id
+    http_method = aws_api_gateway_method.techx-tf-user-method.http_method
+    status_code = aws_api_gateway_method_response.techx-tf-user-options-method-response.status_code
+
+    response_parameters = {
+        "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+        "method.response.header.Access-Control-Allow-Methods" = "'GET,POST,OPTIONS'",
+        "method.response.header.Access-Control-Allow-Origin"  = "'*'",
+    }
+}
+//API gateway INTEGRATION responses
+
 
 // API Deployment => Stage
 resource "aws_api_gateway_deployment" "techx-tf-api-deploment" {
@@ -135,7 +169,9 @@ resource "aws_api_gateway_deployment" "techx-tf-api-deploment" {
                 aws_api_gateway_method.techx-tf-user-get-method.id,
                 aws_api_gateway_integration.techx-tf-user-get-integration.id,
                 aws_api_gateway_method.techx-tf-user-method.id,
-                aws_api_gateway_integration.techx-tf-user-options-integration.id
+                aws_api_gateway_integration.techx-tf-user-options-integration.id,
+                aws_api_gateway_method_response.techx-tf-user-options-method-response.id,
+                aws_api_gateway_integration_response.techx-tf-options-integration-response-method.id
             ]))
         }
 
