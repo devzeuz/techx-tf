@@ -62,7 +62,7 @@ resource "aws_lambda_permission" "techx-tf-lambda-api-gateway-permission" {
     action        = "lambda:InvokeFunction"
     function_name = aws_lambda_function.techx-tf-ingestor-lambda.function_name
     principal     = "apigateway.amazonaws.com"
-    source_arn    = "{var.api-gateway-execution-arn}/*/POST/admin/ingest" // The source ARN must match Executions ARN coming from API gateway. 
+    source_arn    = "${var.api-gateway-execution-arn}/*/POST/admin/ingest" // The source ARN must match Executions ARN coming from API gateway. 
 }
 
 resource "aws_lambda_function" "techx-tf-ingestor-lambda" {
