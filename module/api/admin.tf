@@ -24,7 +24,7 @@ resource "aws_api_gateway_integration" "techx-tf-ingest-post-integration" {
     http_method = aws_api_gateway_method.techx-tf-ingest-post-method.http_method
     integration_http_method = "POST"
     type = "AWS_PROXY"
-    uri = aws_lambda_function.techx-tf-ingestor-lambda.invoke_arn
+    uri = var.ingest-lambda-arn
 }
 
 resource "aws_api_gateway_method" "techx-tf-ingest-options-method" {
