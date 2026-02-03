@@ -8,7 +8,7 @@ variable "dynamodb-arn" {
     description = "my dynamodb arn for techx-tf"
 }
 
-variable "api-gateway-source-arn" {
+variable "api-gateway-execution-arn" {
     type = string
 }
 

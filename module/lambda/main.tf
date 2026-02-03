@@ -64,7 +64,7 @@ resource "aws_lambda_permission" "techxApi-lambda-courses-permission" {
     action        = "lambda:InvokeFunction"
     function_name = aws_lambda_function.techx-lambda-function.function_name
     principal     = "apigateway.amazonaws.com"
-    source_arn    = "${var.api-gateway-source-arn}/*/GET/courses" // The source ARN must match Executions ARN coming from API gateway. 
+    source_arn    = "${var.api-gateway-execution-arn}/*/GET/courses" // The source ARN must match Executions ARN coming from API gateway. 
 }
 
 resource "aws_lambda_permission" "techxApi-lambda-courses-id-permission" {
@@ -72,7 +72,7 @@ resource "aws_lambda_permission" "techxApi-lambda-courses-id-permission" {
     action        = "lambda:InvokeFunction"
     function_name = aws_lambda_function.techx-lambda-function.function_name
     principal     = "apigateway.amazonaws.com"
-    source_arn    = "${var.api-gateway-source-arn}/*/GET/courses/{id}" // The source ARN must match Executions ARN coming from API gateway. 
+    source_arn    = "${var.api-gateway-execution-arn}/*/GET/courses/{id}" // The source ARN must match Executions ARN coming from API gateway. 
 }
 
 // Lambda resource based policy (permission)
@@ -81,7 +81,7 @@ resource "aws_lambda_permission" "techxApi-lambda-user-permission" {
     action        = "lambda:InvokeFunction"
     function_name = aws_lambda_function.techx-lambda-function.function_name
     principal     = "apigateway.amazonaws.com"
-    source_arn    = "${var.api-gateway-source-arn}/*/*/user" // The source ARN must match Executions ARN coming from API gateway. 
+    source_arn    = "${var.api-gateway-execution-arn}/*/*/user" // The source ARN must match Executions ARN coming from API gateway. 
 }
 
 
