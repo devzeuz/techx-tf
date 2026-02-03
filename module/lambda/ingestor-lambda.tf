@@ -1,4 +1,4 @@
-data "archive_file" "techx-lambda-zip" {
+data "archive_file" "techx-tf-lambda-zip" {
   type        = "zip"
   source_file = "${path.module}/src/lambda-techx-ingestor-logic.py" //Concatenation here was done correctly.
   output_path = "${path.module}/src/lambda-techx-ingestor-logic.zip"
@@ -31,7 +31,7 @@ resource "aws_iam_role_policy" "techx-tf-dynamodb-policy" {
             {
                 Action = [
                     "dynamodb:PutItem",
-                    "dynamodb:BatchWriteItem"
+                    "dynamodb:BatchWriteItem",
                 ]
                 Effect   = "Allow"
                 Resource = var.dynamodb-arn
@@ -44,13 +44,21 @@ resource "aws_iam_role_policy" "techx-tf-dynamodb-policy" {
                 ]
                 Effect   = "Allow"
                 Resource = "*"
+            },
+
+            {
+                Action = [
+                    "secretsmanager:GetSecretValue"
+                ]
+                Effect = "Allow"
+                Resource = "*" //I still have to reduce the scope of this to a single resource.
             }
         ]
     })
 }
 
 resource "aws_lambda_function" "techx-tf-ingestor-lambda" {
-    filename = data.archive_file.techx-lambda-zip.output_path
+    filename = data.archive_file.techx-tf-lambda-zip.output_path
     name = "techx-tf-ingestor-lambda"
     role = aws_iam_role.techx-tf-lambda-assume-role-policy.arn
     runtime = "python3.9"
