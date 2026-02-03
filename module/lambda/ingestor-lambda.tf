@@ -58,10 +58,10 @@ resource "aws_iam_role_policy" "techx-tf-dynamodb-policy" {
 }
 
 resource "aws_lambda_function" "techx-tf-ingestor-lambda" {
-    filename = data.archive_file.techx-tf-lambda-zip.output_path
-    name = "techx-tf-ingestor-lambda"
-    role = aws_iam_role.techx-tf-lambda-assume-role-policy.arn
-    runtime = "python3.9"
-    handler = "lambda-techx-ingestor-logic.lambda_handler"
-    timeout = 60
+    filename      = data.archive_file.techx-tf-lambda-zip.output_path
+    function_name = "techx-tf-ingestor-lambda"
+    role         = aws_iam_role.techx-tf-lambda-assume-role-policy.arn
+    runtime      = "python3.9"
+    handler      = "lambda-techx-ingestor-logic.lambda_handler"
+    timeout      = 60
 }

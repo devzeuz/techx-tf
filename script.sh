@@ -4,3 +4,5 @@
 git add .
 git commit -m "script commit"
 git push
+
+echo "Your git add. git commit -m git push  script has run successfully"
