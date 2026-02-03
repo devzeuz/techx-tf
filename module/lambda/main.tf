@@ -25,7 +25,6 @@ resource "aws_iam_role" "techx-lambda-assume-role-policy" {
 
 
 // My managed policy
-
 resource "aws_iam_role_policy" "dynamodb-policy" {
     name = "techx-lambda-dynamodb-policy"
     role = aws_iam_role.techx-lambda-assume-role-policy.id
@@ -76,6 +75,7 @@ resource "aws_lambda_permission" "techxApi-lambda-courses-id-permission" {
     source_arn    = "${var.api-gateway-source-arn}/*/GET/courses/{id}" // The source ARN must match Executions ARN coming from API gateway. 
 }
 
+// Lambda resource based policy (permission)
 resource "aws_lambda_permission" "techxApi-lambda-user-permission" {
     statement_id  = "user-get-AllowAPIGatewayInvoke" //* Subject to change, i have to use random hex numbers*
     action        = "lambda:InvokeFunction"
