@@ -5,3 +5,7 @@ variable "lambda-invoke-arn" {
 variable "cognito-user-pool-arn" {
     type = string
 }
+
+variable "ingest-lambda-arn" {
+    type = string
+}

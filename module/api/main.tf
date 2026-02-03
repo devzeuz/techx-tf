@@ -15,7 +15,7 @@ resource "aws_api_gateway_resource" "techx-tf-courses-resource" {
 
 resource "aws_api_gateway_resource" "techx-tf-id-resource" {
     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
-    parent_id   = aws_api_gateway_resource.techx-tf-courses-resource.id // root resource id represent the / part of the rest api
+    parent_id   = aws_api_gateway_resource.techx-tf-courses-resource.id
     path_part   = "{id}"
 }
 
@@ -271,7 +271,17 @@ resource "aws_api_gateway_deployment" "techx-tf-api-deploment" {
                 aws_api_gateway_integration.techx-tf-user-post-integration.id,
                 aws_api_gateway_integration.techx-tf-user-options-integration.id,
                 aws_api_gateway_method_response.techx-tf-user-options-method-response.id,
-                aws_api_gateway_integration_response.techx-tf-user-options-integration-response.id
+                aws_api_gateway_integration_response.techx-tf-user-options-integration-response.id,
+
+                // /admin resource deployment trigger 
+                aws_api_gateway_resource.techx-tf-admin-resource.id,
+                aws_api_gateway_resource.techx-tf-ingest-resource.id,
+                aws_api_gateway_method.techx-tf-ingest-post-method.id,
+                aws_api_gateway_integration.techx-tf-ingest-post-integration.id,
+                aws_api_gateway_method.techx-tf-ingest-options-method.id,
+                aws_api_gateway_integration.techx-tf-ingest-options-integration.id,
+                aws_api_gateway_integration_response.techx-tf-ingest-options-integration-response.id,
+                aws_api_gateway_method_response.techx-tf-ingest-options-method-response.id
             ]))
         }
 
