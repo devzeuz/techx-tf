@@ -46,14 +46,16 @@ resource "aws_api_gateway_method" "techx-tf-user-post-method" {
     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
     resource_id = aws_api_gateway_resource.techx-tf-user-resource.id
     http_method = "POST"
-    authorization = "NONE"
+    authorization = "COGNITO_USER_POOLS"
+    authorizer_id = aws_api_gateway_authorizer.techx-tf-authorizers.id
 }
 
 resource "aws_api_gateway_method" "techx-tf-user-get-method" {
      rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
      resource_id = aws_api_gateway_resource.techx-tf-user-resource.id
      http_method ="GET"
-     authorization = "NONE" // NONE is a placeholder, there is actually auth token expected. since access (to DynamoDB) is involved.
+     authorization = "COGNITO_USER_POOLS"
+    authorizer_id = aws_api_gateway_authorizer.techx-tf-authorizers.id
 }
 
 // OPTIONS method for /user resource

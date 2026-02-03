@@ -12,6 +12,7 @@ module "lambda" {
 module "api" {
   source = "./module/api"
   lambda-invoke-arn = module.lambda.invoke_arn
+  cognito-user-pool-arn = module.cognito.cognito-arn-output
 }
 
 module "cognito" {
