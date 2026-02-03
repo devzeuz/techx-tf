@@ -1,7 +1,7 @@
 data "archive_file" "techx-tf-lambda-zip" {
   type        = "zip"
-  source_file = "${path.module}/src/lambda-techx-ingestor-logic.py" //Concatenation here was done correctly.
-  output_path = "${path.module}/src/lambda-techx-ingestor-logic.zip"
+  source_file = "${path.module}/src/lambda-techx-tf-ingestor-logic.py" //Concatenation here was done correctly.
+  output_path = "${path.module}/src/lambda-techx-tf-ingestor-logic.zip"
 }
 
 resource "aws_iam_role" "techx-tf-lambda-assume-role-policy" {
