@@ -57,7 +57,13 @@ resource "aws_iam_role_policy" "techx-tf-dynamodb-policy" {
     })
 }
 
-
+resource "aws_lambda_permission" "techx-tf-lambda-api-gateway-permission" {
+    statement_id  = "admin-ingest-AllowAPIGatewayInvoke" //* Subject to change, i have to use random hex numbers*
+    action        = "lambda:InvokeFunction"
+    function_name = aws_lambda_function.techx-tf-ingestor-lambda.function_name
+    principal     = "apigateway.amazonaws.com"
+    source_arn    = "arn:aws:execute-api:us-east-1:522814725174:ffrcc98352/*/POST/admin/ingest" // The source ARN must match Executions ARN coming from API gateway. 
+}
 
 resource "aws_lambda_function" "techx-tf-ingestor-lambda" {
     filename      = data.archive_file.techx-tf-lambda-zip.output_path
