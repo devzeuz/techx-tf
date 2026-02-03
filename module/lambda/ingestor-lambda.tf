@@ -73,3 +73,5 @@ resource "aws_lambda_function" "techx-tf-ingestor-lambda" {
     handler      = "lambda-techx-ingestor-logic.lambda_handler"
     timeout      = 60
 }
+
+//
