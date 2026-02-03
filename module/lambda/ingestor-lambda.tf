@@ -57,6 +57,8 @@ resource "aws_iam_role_policy" "techx-tf-dynamodb-policy" {
     })
 }
 
+
+
 resource "aws_lambda_function" "techx-tf-ingestor-lambda" {
     filename      = data.archive_file.techx-tf-lambda-zip.output_path
     function_name = "techx-tf-ingestor-lambda"
