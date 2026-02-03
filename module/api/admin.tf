@@ -44,7 +44,7 @@ resource "aws_api_gateway_integration" "techx-tf-ingest-options-integration" {
 resource "aws_api_gateway_integration_response" "techx-tf-ingest-options-integration-response" { // standby for error here
     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
     resource_id = aws_api_gateway_resource.techx-tf-ingest-resource.id
-    http_method = aws_api_gateway_method.techx-tf-ingest-options-method.http_method
+    http_method = aws_api_gateway_integration.techx-tf-ingest-options-integration.http_method
     status_code = "200"
 
     response_parameters = {
@@ -57,7 +57,7 @@ resource "aws_api_gateway_integration_response" "techx-tf-ingest-options-integra
 resource "aws_api_gateway_method_response" "techx-tf-ingest-options-method-response" {
     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
     resource_id = aws_api_gateway_resource.techx-tf-ingest-resource.id
-    http_method = aws_api_gateway_method.techx-tf-ingest-options-method.http_method
+    http_method = aws_api_gateway_integration.techx-tf-ingest-options-integration.http_method
     status_code = "200"
 
     response_parameters = {
