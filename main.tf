@@ -16,6 +16,6 @@ module "api" {
   ingest-lambda-invoke-arn = module.lambda.ingest-lambda-invoke-arn
 }
 
-module "cognito" {
-  source = "./module/cognito"
-}
+# module "cognito" {
+#   source = "./module/cognito"
+# }
