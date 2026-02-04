@@ -138,7 +138,7 @@ resource "aws_api_gateway_integration" "techx-tf-courses-options-integration" {
     type = "MOCK"
 
     request_templates = {
-        "application/json" = jsonencode({})
+        "application/json" = jsonencode({"statusCode": 200})
     }
 }
 
