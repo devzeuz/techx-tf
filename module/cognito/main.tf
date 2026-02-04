@@ -1,5 +1,5 @@
 resource "aws_cognito_user_pool" "techx-tf-user-pool" {
-    name = "techx-tf-user-pool"
+    name = "techx-tf-cognito-user-pool"
     alias_attributes = ["email"] // I justchnaged this so the next step is to push and run. remeber to change the ids on the frontend code.
 }
 
