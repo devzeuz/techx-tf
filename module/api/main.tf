@@ -156,7 +156,9 @@ resource "aws_api_gateway_method_response" "techx-tf-courses-get-method-response
     status_code = "200"
 
     response_parameters = {
-        "method.response.header.Access-Control-Allow-Headers" = true,
+         "method.response.header.Access-Control-Allow-Headers" = true, 
+        "method.response.header.Access-Control-Allow-Methods" = true,
+        "method.response.header.Access-Control-Allow-Origin"  = true,
     }
     
     response_models = {
@@ -203,6 +205,10 @@ resource "aws_api_gateway_method_response" "techx-tf-courses-options-method-resp
         "method.response.header.Access-Control-Allow-Headers" = true, 
         "method.response.header.Access-Control-Allow-Methods" = true,
         "method.response.header.Access-Control-Allow-Origin"  = true,
+    }
+    
+    response_models = {
+      "application/json" = "Empty"
     }
 }
 // API gateway METHOD responses
