@@ -136,6 +136,10 @@ resource "aws_api_gateway_integration" "techx-tf-courses-options-integration" {
     resource_id = aws_api_gateway_resource.techx-tf-courses-resource.id
     http_method = aws_api_gateway_method.techx-tf-courses-options-method.http_method
     type = "MOCK"
+
+    request_templates = {
+        "application/json" = jsonencode({})
+    }
 }
 
 // OPTIONS method integratiion for /id resource
@@ -161,6 +165,7 @@ resource "aws_api_gateway_method_response" "techx-tf-user-options-method-respons
         "method.response.header.Access-Control-Allow-Origin"  = true,
     }
 }
+
 
 // /courses/{id} options method-response
 resource "aws_api_gateway_method_response" "techx-tf-id-options-method-response" {
