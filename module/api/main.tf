@@ -148,24 +148,6 @@ resource "aws_api_gateway_integration" "techx-tf-id-options-integration" {
 // API Method Integration
 
 // API gateway METHOD responses
-//Courses GET Method, METHOD Response
-resource "aws_api_gateway_method_response" "techx-tf-courses-get-method-response" {
-    rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
-    resource_id = aws_api_gateway_resource.techx-tf-courses-resource.id
-    http_method = aws_api_gateway_integration.techx-tf-courses-integration.http_method
-    status_code = "200"
-
-    response_parameters = {
-         "method.response.header.Access-Control-Allow-Headers" = true, 
-        "method.response.header.Access-Control-Allow-Methods" = true,
-        "method.response.header.Access-Control-Allow-Origin"  = true,
-    }
-    
-    response_models = {
-      "application/json" = "Empty"
-    }
-}
-
 // /user OPTIONS method-response
 resource "aws_api_gateway_method_response" "techx-tf-user-options-method-response" {
     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
