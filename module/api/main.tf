@@ -160,7 +160,7 @@ resource "aws_api_gateway_method_response" "techx-tf-courses-get-method-response
     }
     
     response_models = {
-      "application/json" = ""
+      "application/json" = "Empty"
     }
 }
 
