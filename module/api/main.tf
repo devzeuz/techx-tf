@@ -152,7 +152,7 @@ resource "aws_api_gateway_integration" "techx-tf-id-options-integration" {
 resource "aws_api_gateway_method_response" "techx-tf-courses-get-method-response" {
     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
     resource_id = aws_api_gateway_resource.techx-tf-courses-resource.id
-    http_method = aws_api_gateway_method.techx-tf-courses-get-method.http_method
+    http_method = aws_api_gateway_method.techx-tf-courses-method.http_method
     status_code = "200"
 
     response_parameters = {
