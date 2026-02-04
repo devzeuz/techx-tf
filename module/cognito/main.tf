@@ -1,5 +1,6 @@
 resource "aws_cognito_user_pool" "techx-tf-user-pool" {
     name = "techx-tf-user-pool"
+    alias_attributes = ["email"]
 }
 
 resource "aws_cognito_user_pool_client" "techx-tf-user-pool-client" {
