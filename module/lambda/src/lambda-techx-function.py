@@ -21,7 +21,7 @@ def lambda_handler(event, context):
     # Enable CORS for every response
     headers = {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Origin': 'http://localhost:5173',
         'Access-Control-Allow-Headers': 'Content-Type,Authorization',
         'Access-Control-Allow-Methods': 'OPTIONS,GET,POST'
     }
