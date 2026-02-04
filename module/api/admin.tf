@@ -41,7 +41,7 @@ resource "aws_api_gateway_integration" "techx-tf-ingest-options-integration" {
     type = "MOCK"
 }
 
-resource "aws_api_gateway_integration_response" "techx-tf-ingest-options-integration-response" { // standby for error here
+resource "aws_api_gateway_integration_response" "techx-tf-ingest-options-integration-response" {
     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
     resource_id = aws_api_gateway_resource.techx-tf-ingest-resource.id
     http_method = aws_api_gateway_integration.techx-tf-ingest-options-integration.http_method
