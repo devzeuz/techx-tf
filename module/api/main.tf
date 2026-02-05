@@ -216,7 +216,7 @@ resource "aws_api_gateway_integration_response" "techx-tf-user-options-integrati
     response_parameters = {
         "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,Authorization'",
         "method.response.header.Access-Control-Allow-Methods" = "'GET,POST,OPTIONS'",
-        "method.response.header.Access-Control-Allow-Origin"  = "'http://localhost:5173/'",
+        "method.response.header.Access-Control-Allow-Origin"  = "'http://localhost:5173'",
     }
 }
 
@@ -230,7 +230,7 @@ resource "aws_api_gateway_integration_response" "techx-tf-id-options-integration
     response_parameters = {
         "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,Authorization'",
         "method.response.header.Access-Control-Allow-Methods" = "'GET,OPTIONS'",
-        "method.response.header.Access-Control-Allow-Origin"  = "'http://localhost:5173/'",
+        "method.response.header.Access-Control-Allow-Origin"  = "'http://localhost:5173'",
     }
 }
 // /course OPTIONS method integration-response
@@ -243,7 +243,7 @@ resource "aws_api_gateway_integration_response" "techx-tf-courses-options-integr
     response_parameters = {
         "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,Authorization'",
         "method.response.header.Access-Control-Allow-Methods" = "'GET,OPTIONS'",
-        "method.response.header.Access-Control-Allow-Origin"  = "'http://localhost:5173/'"
+        "method.response.header.Access-Control-Allow-Origin"  = "'http://localhost:5173'"
     }
 }
 //API gateway INTEGRATION responses
