@@ -214,8 +214,8 @@ resource "aws_api_gateway_integration_response" "techx-tf-user-options-integrati
     status_code = aws_api_gateway_method_response.techx-tf-user-options-method-response.status_code
 
     response_parameters = {
-        "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
-        "method.response.header.Access-Control-Allow-Methods" = "'GET,POST','OPTIONS'",
+        "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,Authorization'",
+        "method.response.header.Access-Control-Allow-Methods" = "'GET,POST,OPTIONS'",
         "method.response.header.Access-Control-Allow-Origin"  = "'*'",
     }
 }
@@ -228,8 +228,8 @@ resource "aws_api_gateway_integration_response" "techx-tf-id-options-integration
     status_code = aws_api_gateway_method_response.techx-tf-id-options-method-response.status_code
 
     response_parameters = {
-        "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
-        "method.response.header.Access-Control-Allow-Methods" = "'GET','OPTIONS'",
+        "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,Authorization'",
+        "method.response.header.Access-Control-Allow-Methods" = "'GET,OPTIONS'",
         "method.response.header.Access-Control-Allow-Origin"  = "'*'",
     }
 }
@@ -241,7 +241,7 @@ resource "aws_api_gateway_integration_response" "techx-tf-courses-options-integr
     status_code = aws_api_gateway_method_response.techx-tf-courses-options-method-response.status_code
 
     response_parameters = {
-        "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+        "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,Authorization'",
         "method.response.header.Access-Control-Allow-Methods" = "'GET','OPTIONS'",
         "method.response.header.Access-Control-Allow-Origin"  = "'*'"
     }
