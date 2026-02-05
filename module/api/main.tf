@@ -128,6 +128,10 @@ resource "aws_api_gateway_integration" "techx-tf-user-options-integration" {
     resource_id = aws_api_gateway_resource.techx-tf-user-resource.id
     http_method = aws_api_gateway_method.techx-tf-user-options-method.http_method
     type                    = "MOCK"
+
+    request_templates = {
+        "application/json" = jsonencode({"statusCode": 200})
+    }
 }
 
 // OPTIONS method integratiion for /courses resource
@@ -137,6 +141,8 @@ resource "aws_api_gateway_integration" "techx-tf-courses-options-integration" {
     http_method = aws_api_gateway_method.techx-tf-courses-options-method.http_method
     type = "MOCK"
 
+
+    // Added this to my integrations as per Q documentation.
     request_templates = {
         "application/json" = jsonencode({"statusCode": 200})
     }
@@ -148,6 +154,10 @@ resource "aws_api_gateway_integration" "techx-tf-id-options-integration" {
     resource_id = aws_api_gateway_resource.techx-tf-id-resource.id
     http_method = aws_api_gateway_method.techx-tf-id-options-method.http_method
     type = "MOCK"
+
+    request_templates = {
+        "application/json" = jsonencode({"statusCode": 200})
+    }
 }
 // API Method Integration
 
@@ -208,6 +218,7 @@ resource "aws_api_gateway_method_response" "techx-tf-courses-options-method-resp
 //API gateway INTEGRATION responses
 //user resource OPTIONS method integration-response
 resource "aws_api_gateway_integration_response" "techx-tf-user-options-integration-response" {
+    depends_on = [ aws_api_gateway_integration.techx-tf-user-options-integration ]
     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
     resource_id = aws_api_gateway_resource.techx-tf-user-resource.id
     http_method = aws_api_gateway_method.techx-tf-user-options-method.http_method
@@ -235,6 +246,7 @@ resource "aws_api_gateway_integration_response" "techx-tf-id-options-integration
 }
 // /course OPTIONS method integration-response
 resource "aws_api_gateway_integration_response" "techx-tf-courses-options-integration-response" {
+    depends_on = [ aws_api_gateway_integration.techx-tf-courses-options-integration ]
     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
     resource_id = aws_api_gateway_resource.techx-tf-courses-resource.id
     http_method = aws_api_gateway_method.techx-tf-courses-options-method.http_method
@@ -286,7 +298,8 @@ resource "aws_api_gateway_deployment" "techx-tf-api-deploment" {
                 aws_api_gateway_method_response.techx-tf-user-options-method-response.id,
                 aws_api_gateway_integration_response.techx-tf-user-options-integration-response.id,
 
-                // /admin resource deployment trigger 
+
+                // /admin resource deployment trigger
                 aws_api_gateway_resource.techx-tf-admin-resource.id,
                 aws_api_gateway_resource.techx-tf-ingest-resource.id,
                 aws_api_gateway_method.techx-tf-ingest-post-method.id,
