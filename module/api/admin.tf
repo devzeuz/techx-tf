@@ -40,6 +40,10 @@ resource "aws_api_gateway_integration" "techx-tf-ingest-options-integration" {
     http_method = aws_api_gateway_method.techx-tf-ingest-options-method.http_method
     type = "MOCK"
     content_handling = "CONVERT_TO_TEXT"
+
+        request_templates = {
+            "application/json" = "{\"statusCode\": 200}"
+        }
 }
 
 resource "aws_api_gateway_method_response" "techx-tf-ingest-options-method-response" {
