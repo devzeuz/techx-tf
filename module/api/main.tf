@@ -306,9 +306,13 @@ resource "aws_api_gateway_deployment" "techx-tf-api-deploment" {
                 aws_api_gateway_method.techx-tf-ingest-post-method.id,
                 aws_api_gateway_integration.techx-tf-ingest-post-integration.id,
                 aws_api_gateway_method.techx-tf-ingest-options-method.id,
+                aws_api_gateway_method.techx-tf-admin-options-method.id,
                 aws_api_gateway_integration.techx-tf-ingest-options-integration.id,
+                aws_api_gateway_integration.techx-tf-admin-options-integration.id,
                 aws_api_gateway_integration_response.techx-tf-ingest-options-integration-response.id,
-                aws_api_gateway_method_response.techx-tf-ingest-options-method-response.id
+                aws_api_gateway_integration_response.techx-tf-admin-options-integration-response.id,
+                aws_api_gateway_method_response.techx-tf-ingest-options-method-response.id,
+                aws_api_gateway_method_response.techx-tf-admin-options-method-response.id
             ]))
         }
 
