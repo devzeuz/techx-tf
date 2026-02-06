@@ -59,28 +59,28 @@ resource "aws_api_gateway_method" "techx-tf-user-get-method" {
 }
 
 // OPTIONS method for /user resource
-resource "aws_api_gateway_method" "techx-tf-user-options-method" {
-    rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
-     resource_id = aws_api_gateway_resource.techx-tf-user-resource.id
-     http_method = "OPTIONS"
-     authorization = "NONE"
-}
+# resource "aws_api_gateway_method" "techx-tf-user-options-method" {
+#     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
+#      resource_id = aws_api_gateway_resource.techx-tf-user-resource.id
+#      http_method = "OPTIONS"
+#      authorization = "NONE"
+# }
 
 // OPTIONS method for /courses/{id} resource
-resource "aws_api_gateway_method" "techx-tf-id-options-method" {
-    rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
-    resource_id = aws_api_gateway_resource.techx-tf-id-resource.id
-    http_method = "OPTIONS"
-    authorization = "NONE"
-}
+# resource "aws_api_gateway_method" "techx-tf-id-options-method" {
+#     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
+#     resource_id = aws_api_gateway_resource.techx-tf-id-resource.id
+#     http_method = "OPTIONS"
+#     authorization = "NONE"
+# }
 
 // OPTIONS method for /courses resource
-resource "aws_api_gateway_method" "techx-tf-courses-options-method" {
-    rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
-    resource_id = aws_api_gateway_resource.techx-tf-courses-resource.id
-    http_method = "OPTIONS"
-    authorization = "NONE"
-}
+# resource "aws_api_gateway_method" "techx-tf-courses-options-method" {
+#     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
+#     resource_id = aws_api_gateway_resource.techx-tf-courses-resource.id
+#     http_method = "OPTIONS"
+#     authorization = "NONE"
+# }
 // API Resource Methods
 
 
@@ -123,141 +123,142 @@ resource "aws_api_gateway_integration" "techx-tf-user-post-integration" {
 }
 
 // OPTIONS method integratiion for /user resource
-resource "aws_api_gateway_integration" "techx-tf-user-options-integration" {
-    rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
-    resource_id = aws_api_gateway_resource.techx-tf-user-resource.id
-    http_method = aws_api_gateway_method.techx-tf-user-options-method.http_method
-    type                    = "MOCK"
+# resource "aws_api_gateway_integration" "techx-tf-user-options-integration" {
+#     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
+#     resource_id = aws_api_gateway_resource.techx-tf-user-resource.id
+#     http_method = aws_api_gateway_method.techx-tf-user-options-method.http_method
+#     type                    = "MOCK"
 
-    request_templates = {
-        "application/json" = jsonencode({"statusCode": 200})
-    }
-}
+#     request_templates = {
+#         "application/json" = jsonencode({"statusCode": 200})
+#     }
+# }
 
 // OPTIONS method integratiion for /courses resource
-resource "aws_api_gateway_integration" "techx-tf-courses-options-integration" {
-    rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
-    resource_id = aws_api_gateway_resource.techx-tf-courses-resource.id
-    http_method = aws_api_gateway_method.techx-tf-courses-options-method.http_method
-    type = "MOCK"
+# resource "aws_api_gateway_integration" "techx-tf-courses-options-integration" {
+#     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
+#     resource_id = aws_api_gateway_resource.techx-tf-courses-resource.id
+#     http_method = aws_api_gateway_method.techx-tf-courses-options-method.http_method
+#     type = "MOCK"
 
 
-    // Added this to my integrations as per Q documentation.
-    request_templates = {
-        "application/json" = jsonencode({"statusCode": 200})
-    }
-}
+#     // Added this to my integrations as per Q documentation.
+#     request_templates = {
+#         "application/json" = jsonencode({"statusCode": 200})
+#     }
+# }
 
 // OPTIONS method integratiion for /id resource
-resource "aws_api_gateway_integration" "techx-tf-id-options-integration" {
-    rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
-    resource_id = aws_api_gateway_resource.techx-tf-id-resource.id
-    http_method = aws_api_gateway_method.techx-tf-id-options-method.http_method
-    type = "MOCK"
+# resource "aws_api_gateway_integration" "techx-tf-id-options-integration" {
+#     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
+#     resource_id = aws_api_gateway_resource.techx-tf-id-resource.id
+#     http_method = aws_api_gateway_method.techx-tf-id-options-method.http_method
+#     type = "MOCK"
 
-    request_templates = {
-        "application/json" = jsonencode({"statusCode": 200})
-    }
-}
+#     request_templates = {
+#         "application/json" = jsonencode({"statusCode": 200})
+#     }
+# }
 // API Method Integration
+
 
 // API gateway METHOD responses
 // /user OPTIONS method-response
-resource "aws_api_gateway_method_response" "techx-tf-user-options-method-response" {
-    rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
-    resource_id = aws_api_gateway_resource.techx-tf-user-resource.id
-    http_method = aws_api_gateway_method.techx-tf-user-options-method.http_method
-    status_code = "200"
+# resource "aws_api_gateway_method_response" "techx-tf-user-options-method-response" {
+#     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
+#     resource_id = aws_api_gateway_resource.techx-tf-user-resource.id
+#     http_method = aws_api_gateway_method.techx-tf-user-options-method.http_method
+#     status_code = "200"
 
-    response_parameters = {
-        "method.response.header.Access-Control-Allow-Headers" = true,
-        "method.response.header.Access-Control-Allow-Methods" = true,
-        "method.response.header.Access-Control-Allow-Origin"  = true,
-    }
+#     response_parameters = {
+#         "method.response.header.Access-Control-Allow-Headers" = true,
+#         "method.response.header.Access-Control-Allow-Methods" = true,
+#         "method.response.header.Access-Control-Allow-Origin"  = true,
+#     }
 
-    response_models = {
-      "application/json" = "Empty"
-    }
-}
+#     response_models = {
+#       "application/json" = "Empty"
+#     }
+# }
 
 
 // /courses/{id} options method-response
-resource "aws_api_gateway_method_response" "techx-tf-id-options-method-response" {
-    rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
-    resource_id = aws_api_gateway_resource.techx-tf-id-resource.id
-    http_method = aws_api_gateway_method.techx-tf-id-options-method.http_method
-    status_code = 200
+# resource "aws_api_gateway_method_response" "techx-tf-id-options-method-response" {
+#     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
+#     resource_id = aws_api_gateway_resource.techx-tf-id-resource.id
+#     http_method = aws_api_gateway_method.techx-tf-id-options-method.http_method
+#     status_code = 200
 
-    response_parameters = {
-        "method.response.header.Access-Control-Allow-Headers" = true,
-        "method.response.header.Access-Control-Allow-Methods" = true,
-        "method.response.header.Access-Control-Allow-Origin"  = true,
-    }
-}
+#     response_parameters = {
+#         "method.response.header.Access-Control-Allow-Headers" = true,
+#         "method.response.header.Access-Control-Allow-Methods" = true,
+#         "method.response.header.Access-Control-Allow-Origin"  = true,
+#     }
+# }
 
 // /courses options method-response
-resource "aws_api_gateway_method_response" "techx-tf-courses-options-method-response" {
-    rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
-    resource_id = aws_api_gateway_resource.techx-tf-courses-resource.id
-    http_method = aws_api_gateway_method.techx-tf-courses-options-method.http_method
-    status_code = "200"
+# resource "aws_api_gateway_method_response" "techx-tf-courses-options-method-response" {
+#     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
+#     resource_id = aws_api_gateway_resource.techx-tf-courses-resource.id
+#     http_method = aws_api_gateway_method.techx-tf-courses-options-method.http_method
+#     status_code = "200"
 
-    response_parameters = {
-        "method.response.header.Access-Control-Allow-Headers" = true, 
-        "method.response.header.Access-Control-Allow-Methods" = true,
-        "method.response.header.Access-Control-Allow-Origin"  = true,
-    }
+#     response_parameters = {
+#         "method.response.header.Access-Control-Allow-Headers" = true, 
+#         "method.response.header.Access-Control-Allow-Methods" = true,
+#         "method.response.header.Access-Control-Allow-Origin"  = true,
+#     }
     
-    response_models = {
-      "application/json" = "Empty"
-    }
-}
+#     response_models = {
+#       "application/json" = "Empty"
+#     }
+# }
 // API gateway METHOD responses
 
 
 //API gateway INTEGRATION responses
 //user resource OPTIONS method integration-response
-resource "aws_api_gateway_integration_response" "techx-tf-user-options-integration-response" {
-    depends_on = [ aws_api_gateway_integration.techx-tf-user-options-integration ]
-    rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
-    resource_id = aws_api_gateway_resource.techx-tf-user-resource.id
-    http_method = aws_api_gateway_method.techx-tf-user-options-method.http_method
-    status_code = aws_api_gateway_method_response.techx-tf-user-options-method-response.status_code
+# resource "aws_api_gateway_integration_response" "techx-tf-user-options-integration-response" {
+#     depends_on = [ aws_api_gateway_integration.techx-tf-user-options-integration ]
+#     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
+#     resource_id = aws_api_gateway_resource.techx-tf-user-resource.id
+#     http_method = aws_api_gateway_method.techx-tf-user-options-method.http_method
+#     status_code = aws_api_gateway_method_response.techx-tf-user-options-method-response.status_code
 
-    response_parameters = {
-        "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,Authorization'",
-        "method.response.header.Access-Control-Allow-Methods" = "'GET,POST,OPTIONS'",
-        "method.response.header.Access-Control-Allow-Origin"  = "'http://localhost:5173'",
-    }
-}
+#     response_parameters = {
+#         "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,Authorization'",
+#         "method.response.header.Access-Control-Allow-Methods" = "'GET,POST,OPTIONS'",
+#         "method.response.header.Access-Control-Allow-Origin"  = "'http://localhost:5173'",
+#     }
+# }
 
 // /courses/{id} resource OPTIONS method integration-response
-resource "aws_api_gateway_integration_response" "techx-tf-id-options-integration-response" {
-    rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
-    resource_id = aws_api_gateway_resource.techx-tf-id-resource.id
-    http_method = aws_api_gateway_integration.techx-tf-id-options-integration.http_method
-    status_code = aws_api_gateway_method_response.techx-tf-id-options-method-response.status_code
+# resource "aws_api_gateway_integration_response" "techx-tf-id-options-integration-response" {
+#     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
+#     resource_id = aws_api_gateway_resource.techx-tf-id-resource.id
+#     http_method = aws_api_gateway_integration.techx-tf-id-options-integration.http_method
+#     status_code = aws_api_gateway_method_response.techx-tf-id-options-method-response.status_code
 
-    response_parameters = {
-        "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,Authorization'",
-        "method.response.header.Access-Control-Allow-Methods" = "'GET,OPTIONS'",
-        "method.response.header.Access-Control-Allow-Origin"  = "'http://localhost:5173'",
-    }
-}
+#     response_parameters = {
+#         "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,Authorization'",
+#         "method.response.header.Access-Control-Allow-Methods" = "'GET,OPTIONS'",
+#         "method.response.header.Access-Control-Allow-Origin"  = "'http://localhost:5173'",
+#     }
+# }
 // /course OPTIONS method integration-response
-resource "aws_api_gateway_integration_response" "techx-tf-courses-options-integration-response" {
-    depends_on = [ aws_api_gateway_integration.techx-tf-courses-options-integration ]
-    rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
-    resource_id = aws_api_gateway_resource.techx-tf-courses-resource.id
-    http_method = aws_api_gateway_method.techx-tf-courses-options-method.http_method
-    status_code = aws_api_gateway_method_response.techx-tf-courses-options-method-response.status_code
+# resource "aws_api_gateway_integration_response" "techx-tf-courses-options-integration-response" {
+#     depends_on = [ aws_api_gateway_integration.techx-tf-courses-options-integration ]
+#     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
+#     resource_id = aws_api_gateway_resource.techx-tf-courses-resource.id
+#     http_method = aws_api_gateway_method.techx-tf-courses-options-method.http_method
+#     status_code = aws_api_gateway_method_response.techx-tf-courses-options-method-response.status_code
 
-    response_parameters = {
-        "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,Authorization'",
-        "method.response.header.Access-Control-Allow-Methods" = "'GET,OPTIONS'",
-        "method.response.header.Access-Control-Allow-Origin"  = "'http://localhost:5173'"
-    }
-}
+#     response_parameters = {
+#         "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,Authorization'",
+#         "method.response.header.Access-Control-Allow-Methods" = "'GET,OPTIONS'",
+#         "method.response.header.Access-Control-Allow-Origin"  = "'http://localhost:5173'"
+#     }
+# }
 //API gateway INTEGRATION responses
 
 
