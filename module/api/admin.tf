@@ -71,7 +71,7 @@ resource "aws_api_gateway_integration" "techx-tf-ingest-options-integration" {
 resource "aws_api_gateway_method_response" "techx-tf-admin-options-method-response" {
     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
     resource_id = aws_api_gateway_resource.techx-tf-admin-resource.id
-    http_method = aws_api_gateway_integration.techx-tf-admin-options-integration.http_method
+    http_method = aws_api_gateway_method.techx-tf-admin-options-method.http_method
     status_code = "200"
 
     response_parameters = {
@@ -99,7 +99,7 @@ resource "aws_api_gateway_method_response" "techx-tf-ingest-options-method-respo
 resource "aws_api_gateway_integration_response" "techx-tf-admin-options-integration-response" {
     rest_api_id = aws_api_gateway_rest_api.techx-tf-api-gateway.id
     resource_id = aws_api_gateway_resource.techx-tf-admin-resource.id
-    http_method = aws_api_gateway_integration.techx-tf-admin-options-integration.http_method
+    http_method = aws_api_gateway_method.techx-tf-admin-options-method.http_method
     status_code = "200"
 
     response_parameters = {
