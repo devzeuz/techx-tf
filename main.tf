@@ -20,7 +20,7 @@ module "cognito" {
   source = "./module/cognito"
 }
 
-module "cors" {
+module "cors-resource" {
   source = "squidfunk/api-gateway-enable-cors/aws"
   version = "0.3.3"
 
@@ -28,7 +28,7 @@ module "cors" {
   api_resource_id = module.api.courses-resource-id
 }
 
-module "cors" {
+module "cors-id-resource" {
   source = "squidfunk/api-gateway-enable-cors/aws"
   version = "0.3.3"
 
@@ -36,7 +36,7 @@ module "cors" {
   api_resource_id = module.api.id-courses-id
 }
 
-module "cors" {
+module "cors-user-resource" {
   source = "squidfunk/api-gateway-enable-cors/aws"
   version = "0.3.3"
 
