@@ -39,6 +39,7 @@ resource "aws_api_gateway_integration" "techx-tf-ingest-options-integration" {
     resource_id = aws_api_gateway_resource.techx-tf-ingest-resource.id
     http_method = aws_api_gateway_method.techx-tf-ingest-options-method.http_method
     type = "MOCK"
+    content_handling = "CONVERT_TO_TEXT"
 }
 
 resource "aws_api_gateway_method_response" "techx-tf-ingest-options-method-response" {
