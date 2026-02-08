@@ -48,7 +48,7 @@ resource "aws_api_gateway_integration" "techx-tf-admin-options-integration" {
     resource_id = aws_api_gateway_resource.techx-tf-admin-resource.id
     http_method = aws_api_gateway_method.techx-tf-admin-options-method.http_method
     type = "MOCK"
-    content_handling = "CONVERT_TO_TEXT"
+    # content_handling = "CONVERT_TO_TEXT"
 
         request_templates = {
             "application/json" = "{\"statusCode\": 200}"
@@ -60,7 +60,7 @@ resource "aws_api_gateway_integration" "techx-tf-ingest-options-integration" {
     resource_id = aws_api_gateway_resource.techx-tf-ingest-resource.id
     http_method = aws_api_gateway_method.techx-tf-ingest-options-method.http_method
     type = "MOCK"
-    content_handling = "CONVERT_TO_TEXT"
+    # content_handling = "CONVERT_TO_TEXT"
 
         request_templates = {
             "application/json" = "{\"statusCode\": 200}"
