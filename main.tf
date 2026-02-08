@@ -20,27 +20,27 @@ module "cognito" {
   source = "./module/cognito"
 }
 
-module "cors-resource" {
-  source = "squidfunk/api-gateway-enable-cors/aws"
-  version = "0.3.3"
+# module "cors-resource" {
+#   source = "squidfunk/api-gateway-enable-cors/aws"
+#   version = "0.3.3"
 
-  api_id          = module.api.rest-api-id
-  api_resource_id = module.api.courses-resource-id
-}
+#   api_id          = module.api.rest-api-id
+#   api_resource_id = module.api.courses-resource-id
+# }
 
-module "cors-id-resource" {
-  source = "squidfunk/api-gateway-enable-cors/aws"
-  version = "0.3.3"
+# module "cors-id-resource" {
+#   source = "squidfunk/api-gateway-enable-cors/aws"
+#   version = "0.3.3"
 
-  api_id          = module.api.rest-api-id
-  api_resource_id = module.api.id-courses-id
-}
+#   api_id          = module.api.rest-api-id
+#   api_resource_id = module.api.id-courses-id
+# }
 
-module "cors-user-resource" {
-  source = "squidfunk/api-gateway-enable-cors/aws"
-  version = "0.3.3"
+# module "cors-user-resource" {
+#   source = "squidfunk/api-gateway-enable-cors/aws"
+#   version = "0.3.3"
 
-  api_id          = module.api.rest-api-id
-  api_resource_id = module.api.user-resource-id
-}
+#   api_id          = module.api.rest-api-id
+#   api_resource_id = module.api.user-resource-id
+# }
 
