@@ -20,6 +20,10 @@ module "cognito" {
   source = "./module/cognito"
 }
 
+module "backend" {
+  source = "./module/backend"
+}
+
 # module "cors-resource" {
 #   source = "squidfunk/api-gateway-enable-cors/aws"
 #   version = "0.3.3"
